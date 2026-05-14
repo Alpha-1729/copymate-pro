@@ -1,0 +1,170 @@
+{
+  "name": "copymate-pro",
+  "displayName": "CopyMate Pro",
+  "description": "Stop manually copying files into ChatGPT. Browse your workspace, filter with .copyignore, and send structured code context to any LLM — right from VS Code.",
+  "version": "0.1.0",
+  "publisher": "Alpha-1729",
+  "author": {
+    "name": "Alpha-1729",
+    "url": "https://github.com/Alpha-1729"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Alpha-1729/copymate-pro.git"
+  },
+  "engines": {
+    "vscode": "^1.120.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "configurationDefaults": {
+      "workbench.colorCustomizations": {
+        "checkbox.background": "#3c3c3c",
+        "checkbox.foreground": "#ffffff",
+        "checkbox.border": "#6c6c6c",
+        "checkbox.selectBackground": "#0078d4",
+        "checkbox.selectBorder": "#0078d4"
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "copymatePro",
+          "title": "CopyMate Pro",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "copymatePro": [
+        {
+          "id": "copymateTree",
+          "name": "Files",
+          "type": "tree",
+          "icon": "media/icon.png"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "copymate.selectAll",
+        "title": "Select All",
+        "icon": "$(check-all)",
+        "category": "CopyMate"
+      },
+      {
+        "command": "copymate.unselectAll",
+        "title": "Unselect All",
+        "icon": "$(close-all)",
+        "category": "CopyMate"
+      },
+      {
+        "command": "copymate.copySelected",
+        "title": "Copy Selected Content",
+        "icon": "$(copy)",
+        "category": "CopyMate"
+      },
+      {
+        "command": "copymate.copyTree",
+        "title": "Copy Tree",
+        "icon": "$(list-tree)",
+        "category": "CopyMate"
+      },
+      {
+        "command": "copymate.addCheckedToIgnore",
+        "title": "Add Selected to .copyignore",
+        "icon": "$(exclude)",
+        "category": "CopyMate"
+      },
+      {
+        "command": "copymate.refreshTree",
+        "title": "Refresh",
+        "icon": "$(refresh)",
+        "category": "CopyMate"
+      },
+      {
+        "command": "copymate.addToIgnore",
+        "title": "Add to .copyignore",
+        "icon": "$(exclude)",
+        "category": "CopyMate"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "copymate.selectAll",
+          "when": "view == copymateTree",
+          "group": "navigation@1"
+        },
+        {
+          "command": "copymate.unselectAll",
+          "when": "view == copymateTree",
+          "group": "navigation@2"
+        },
+        {
+          "command": "copymate.copySelected",
+          "when": "view == copymateTree",
+          "group": "navigation@3"
+        },
+        {
+          "command": "copymate.copyTree",
+          "when": "view == copymateTree",
+          "group": "navigation@4"
+        },
+        {
+          "command": "copymate.addCheckedToIgnore",
+          "when": "view == copymateTree",
+          "group": "navigation@5"
+        },
+        {
+          "command": "copymate.refreshTree",
+          "when": "view == copymateTree",
+          "group": "navigation@6"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "copymate.addToIgnore",
+          "when": "view == copymateTree && (viewItem == copymateFile || viewItem == copymateFolder)",
+          "group": "inline@1"
+        },
+        {
+          "command": "copymate.addToIgnore",
+          "when": "view == copymateTree && (viewItem == copymateFile || viewItem == copymateFolder)",
+          "group": "copymate@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "audit": "npm audit --omit=dev"
+  },
+  "devDependencies": {
+    "@types/minimatch": "^5.1.2",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.120.0",
+    "esbuild": "^0.27.3",
+    "eslint": "^9.39.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1"
+  },
+  "dependencies": {
+    "minimatch": "^10.2.5"
+  }
+}
