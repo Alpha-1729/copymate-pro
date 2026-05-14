@@ -2,7 +2,7 @@
   "name": "copymate-pro",
   "displayName": "CopyMate Pro",
   "description": "Stop manually copying files into ChatGPT. Browse your workspace, filter with .copyignore, and send structured code context to any LLM — right from VS Code.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "Alpha-1729",
   "author": {
     "name": "Alpha-1729",
